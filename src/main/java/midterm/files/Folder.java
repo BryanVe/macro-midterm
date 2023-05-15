@@ -16,4 +16,9 @@ public class Folder {
     if (checkIfFolderExists(path))
       FileUtils.deleteDirectory(new File(path));
   }
+
+  public static void deleteHDFSFolders() throws IOException {
+    deleteFolder(System.getProperty("user.dir") + "/HDFS/output");
+    deleteFolder(System.getProperty("user.dir") + "/HDFS/output2");
+  }
 }

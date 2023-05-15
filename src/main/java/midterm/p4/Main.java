@@ -1,4 +1,4 @@
-package midterm.p1;
+package midterm.p4;
 
 import midterm.config.Config;
 import midterm.files.Folder;
@@ -11,7 +11,6 @@ import org.apache.hadoop.mapred.TextInputFormat;
 import org.apache.hadoop.mapred.TextOutputFormat;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
   public static void main(String[] args) throws IOException {
@@ -21,7 +20,7 @@ public class Main {
     JobClient jobClient = new JobClient();
 
     // Create a configuration object for the first job
-    JobConf jobConf = new JobConf(Main.class);
+    JobConf jobConf = new JobConf(midterm.p1.Main.class);
 
     // Config to run locally
     Config.setupLocal(jobConf, "salaries");
@@ -47,7 +46,7 @@ public class Main {
     JobClient jobClient2 = new JobClient();
 
     // Create a configuration object for the job
-    JobConf jobConf2 = new JobConf(Main.class);
+    JobConf jobConf2 = new JobConf(midterm.p1.Main.class);
 
     // Config to run locally
     Config.setupLocal(jobConf2, "salaries2");
