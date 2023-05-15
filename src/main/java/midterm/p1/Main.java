@@ -11,7 +11,8 @@ import org.apache.hadoop.mapred.TextInputFormat;
 import org.apache.hadoop.mapred.TextOutputFormat;
 
 import java.io.IOException;
-import java.util.Arrays;
+
+// ¿Cuál es el salario promedio en USD de los Data Scientists en cada país?
 
 public class Main {
   public static void main(String[] args) throws IOException {

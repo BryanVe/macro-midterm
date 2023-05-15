@@ -10,22 +10,28 @@ import java.io.IOException;
 import java.util.Iterator;
 
 class CustomReducer2 extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
-  String maxJobTitle = "";
-  float maxValue = Float.MIN_VALUE;
 
   @Override
   public void reduce(Text key, Iterator<Text> iterator, OutputCollector<Text, Text> outputCollector, Reporter reporter) throws IOException {
-    Text value = iterator.next();
-    float salary = Float.parseFloat(value.toString());
+    // Inicializamos una suma y frecuencia en 0, para
+    // posteriormente obtener el promedio del salario en USD por país
+    int sum = 0;
+    int frequency = 0;
 
-    if (salary > maxValue) {
-      maxValue = salary;
-      maxJobTitle = key.toString();
+    while (iterator.hasNext()) {
+      Text value = iterator.next();
+      int salaryInUSD = Integer.parseInt(value.toString());
+
+      // Realizamos la suma y aumentamos el contador
+      sum += salaryInUSD;
+      frequency += 1;
     }
 
-    Text newKey = new Text(maxJobTitle);
-    Text newValue = new Text(Float.toString(maxValue));
+    // Obtenemos el promedio del salario en USD
+    float average = (float) sum / frequency;
+    Text newValue = new Text(Float.toString(average));
 
-    outputCollector.collect(newKey, newValue);
+    // Devolvemos la key que es el país y el promedio como valor
+    outputCollector.collect(key, newValue);
   }
 }

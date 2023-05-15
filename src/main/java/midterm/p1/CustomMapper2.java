@@ -12,12 +12,13 @@ import java.io.IOException;
 class CustomMapper2 extends MapReduceBase implements Mapper<LongWritable, Text, Text, Text> {
   @Override
   public void map(LongWritable key, Text value, OutputCollector<Text, Text> outputCollector, Reporter reporter) throws IOException {
-    String valueString = value.toString();
-    String[] rowData = valueString.split("/");
-    String jobTitle = rowData[0].trim();
-    String salary = rowData[1].trim();
-    Text newKey = new Text(jobTitle);
-    Text newValue = new Text(salary);
+    // Ahora obtenemos el país y el salario en USD
+    String valueAsString = value.toString();
+    String[] data = valueAsString.split("/");
+    String companyLocation = data[0].trim();
+    String salaryInUSD = data[1].trim();
+    Text newKey = new Text(companyLocation);
+    Text newValue = new Text(salaryInUSD);
 
     outputCollector.collect(newKey, newValue);
   }

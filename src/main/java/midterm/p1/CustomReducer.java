@@ -10,21 +10,23 @@ import java.io.IOException;
 import java.util.Iterator;
 
 class CustomReducer extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
+  final String QUERY_JOB_TITLE = "Data Scientist";
+
   @Override
   public void reduce(Text key, Iterator<Text> iterator, OutputCollector<Text, Text> outputCollector, Reporter reporter) throws IOException {
-    // create map for saving payment types with its total prices
-    int sum = 0;
-    int counter = 0;
-
+    // Ahorar agrupamos por país mediante el reducer
     while (iterator.hasNext()) {
       Text value = iterator.next();
-      String salary = value.toString();
-      sum += Integer.parseInt(salary);
-      counter += 1;
+      String[] data = value.toString().split("/");
+      String jobTitle = data[0];
+      String salaryInUSD = data[1];
+
+      // Y establecemos la salida como clave el país y como valor el
+      // salario en USD para todos los países que tengan como título "Data Scientist"
+      if (jobTitle.equals(QUERY_JOB_TITLE)) {
+        Text newValue = new Text("/" + salaryInUSD);
+        outputCollector.collect(key, newValue);
+      }
     }
-
-    Text newValue = new Text("/" + (float) sum / counter);
-
-    outputCollector.collect(key, newValue);
   }
 }
