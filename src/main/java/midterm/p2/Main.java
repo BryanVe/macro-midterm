@@ -12,7 +12,7 @@ import org.apache.hadoop.mapred.TextOutputFormat;
 
 import java.io.IOException;
 
-// ¿Cuál es la proporción de empleados remotos en cada nivel de experiencia (experience_level) por país?
+// ¿Cuál es la proporción de empleados remotos en cada nivel de experiencia por país?
 
 public class Main {
   public static void main(String[] args) throws IOException {
@@ -22,7 +22,7 @@ public class Main {
     JobClient jobClient = new JobClient();
 
     // Create a configuration object for the first job
-    JobConf jobConf = new JobConf(midterm.p1.Main.class);
+    JobConf jobConf = new JobConf(Main.class);
 
     // Config to run locally
     Config.setupLocal(jobConf, "salaries");
@@ -48,7 +48,7 @@ public class Main {
     JobClient jobClient2 = new JobClient();
 
     // Create a configuration object for the job
-    JobConf jobConf2 = new JobConf(midterm.p1.Main.class);
+    JobConf jobConf2 = new JobConf(Main.class);
 
     // Config to run locally
     Config.setupLocal(jobConf2, "salaries2");

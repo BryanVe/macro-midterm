@@ -20,8 +20,7 @@ public class CustomReducer2 extends MapReduceBase implements Reducer<Text, Text,
     Set<String> experienceLevels = new HashSet<>();
 
     while (iterator.hasNext()) {
-      String[] values = iterator.next().toString().split("/");
-      String experienceLevel = values[0];
+      String experienceLevel = iterator.next().toString();
 
       experienceLevels.add(experienceLevel);
     }

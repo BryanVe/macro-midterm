@@ -19,7 +19,8 @@ public class CustomMapper extends MapReduceBase implements Mapper<LongWritable, 
     String experienceLevel = rowData[1];
     String remoteRatio = rowData[8];
     String companyLocation = rowData[9];
-    Text newKey = new Text(companyLocation);
+
+    Text newKey = new Text(companyLocation + "/" + experienceLevel);
     Text newValue = new Text(remoteRatio + "/" + experienceLevel + "/" + companyLocation);
 
     outputCollector.collect(newKey, newValue);
