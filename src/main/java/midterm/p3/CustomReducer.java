@@ -1,4 +1,4 @@
-package midterm.p1;
+package midterm.p3;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.MapReduceBase;
@@ -10,19 +10,19 @@ import java.io.IOException;
 import java.util.Iterator;
 
 class CustomReducer extends MapReduceBase implements Reducer<Text, Text, Text, Text> {
-  final String QUERY_JOB_TITLE = "Data Scientist";
+  final String QUERY_JOB_TITLE = "ML Engineer";
 
   @Override
   public void reduce(Text key, Iterator<Text> iterator, OutputCollector<Text, Text> outputCollector, Reporter reporter) throws IOException {
-    // Ahorar agrupamos por país mediante el reducer
+    // Ahorar agrupamos por tamaño mediante el reducer
     while (iterator.hasNext()) {
       Text value = iterator.next();
       String[] data = value.toString().split("/");
       String jobTitle = data[0];
       String salaryInUSD = data[1];
 
-      // Y establecemos la salida como clave el país y como valor el
-      // salario en USD para todos los trabajos que tengan como título "Data Scientist"
+      // Y establecemos la salida como clave el tamaño y como valor el
+      // salario en USD para todos los trabajos que tengan como título "ML Engineer"
       if (jobTitle.equals(QUERY_JOB_TITLE)) {
         Text newValue = new Text("/" + salaryInUSD);
         outputCollector.collect(key, newValue);
