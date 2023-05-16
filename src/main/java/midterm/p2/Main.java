@@ -1,4 +1,4 @@
-package midterm.p4;
+package midterm.p2;
 
 import midterm.config.Config;
 import midterm.files.Folder;
@@ -11,6 +11,8 @@ import org.apache.hadoop.mapred.TextInputFormat;
 import org.apache.hadoop.mapred.TextOutputFormat;
 
 import java.io.IOException;
+
+// ¿Cuál es la proporción de empleados remotos en cada nivel de experiencia (experience_level) por país?
 
 public class Main {
   public static void main(String[] args) throws IOException {
