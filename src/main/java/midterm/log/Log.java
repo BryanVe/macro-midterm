@@ -25,8 +25,8 @@ public class Log {
     } else {
       System.out.println("Args: " + Arrays.toString(args));
 
-      FileInputFormat.setInputPaths(jobConf, new Path(args[1]));
-      FileOutputFormat.setOutputPath(jobConf, new Path(args[2]));
+      FileInputFormat.setInputPaths(jobConf, new Path(args[0]));
+      FileOutputFormat.setOutputPath(jobConf, new Path(args[1]));
     }
   }
 
@@ -45,6 +45,24 @@ public class Log {
 
       FileInputFormat.setInputPaths(jobConf, new Path(args[1]));
       FileOutputFormat.setOutputPath(jobConf, new Path(args[2]));
+    }
+  }
+
+  public static void printArgs3(String[] args, JobConf jobConf) throws IOException {
+    if (Dotenv.load().get("HADOOP_ENV").equals("local")) {
+      Configuration c = new Configuration();
+      String[] files = new GenericOptionsParser(c, args).getRemainingArgs();
+
+      System.out.println("Input: " + files[2]);
+      System.out.println("Output: " + files[3]);
+
+      FileInputFormat.setInputPaths(jobConf, new Path(files[2]));
+      FileOutputFormat.setOutputPath(jobConf, new Path(files[3]));
+    } else {
+      System.out.println("Args: " + Arrays.toString(args));
+
+      FileInputFormat.setInputPaths(jobConf, new Path(args[2]));
+      FileOutputFormat.setOutputPath(jobConf, new Path(args[3]));
     }
   }
 }

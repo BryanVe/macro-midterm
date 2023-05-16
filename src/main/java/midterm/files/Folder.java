@@ -20,5 +20,6 @@ public class Folder {
   public static void deleteHDFSFolders() throws IOException {
     deleteFolder(System.getProperty("user.dir") + "/HDFS/output");
     deleteFolder(System.getProperty("user.dir") + "/HDFS/output2");
+    deleteFolder(System.getProperty("user.dir") + "/HDFS/output3");
   }
 }
