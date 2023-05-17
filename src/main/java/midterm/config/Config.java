@@ -1,7 +1,7 @@
 package midterm.config;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import midterm.p1.Main;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.Mapper;
 import org.apache.hadoop.mapred.Reducer;
@@ -10,13 +10,10 @@ import org.apache.hadoop.mapred.TextOutputFormat;
 
 public class Config {
   public static void setupLocal(JobConf jobConf, String jobName) {
-    if (!Dotenv.load().get("HADOOP_ENV").equals("local")) {
-      jobConf.setJarByClass(Main.class);
-      jobConf.set("fs.defaultFS", "hdfs://hadoop-master:8032");
-    } else {
-      jobConf.set("fs.defaultFS", "local");
-    }
-
+    jobConf.setJarByClass(Main.class);
+    jobConf.addResource(new Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
+    jobConf.addResource(new Path("/usr/local/hadoop/etc/hadoop/hdfs-site.xml"));
+    jobConf.set("fs.defaultFS", "hdfs://hadoop-master:9000");
     jobConf.set("mapreduce.job.maps", "1");
     jobConf.set("mapreduce.job.reduces", "1");
 
